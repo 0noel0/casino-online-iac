@@ -1,0 +1,44 @@
+---
+config:
+  theme: base
+---
+flowchart LR
+  internet([Internet])
+  subgraph CDN_Storage[CDN & Storage]
+    cf[CloudFront OAC]
+    s3[(S3 Bucket - assets)]
+    cf --> s3
+  end
+  subgraph VPC_A[Applications VPC 10.0.0.0/16]
+    direction TB
+    subgraph Public[Public Subnets 2 AZ]
+      igw[Internet GW]
+      nat[NAT GW + EIP]
+      alb[Application Load Balancer ACM]
+    end
+    subgraph Private[Private Subnets 2 AZ]
+      front[EC2 Frontsite]
+      back[EC2 Backoffice]
+      web[EC2 WebAPI]
+      game[EC2 GameAPI]
+      redis[(ElastiCache Redis)]
+    end
+  end
+  subgraph VPC_DW[Data Warehouse VPC 10.1.0.0/16]
+    direction TB
+    subgraph DWPriv[Private Subnets 2 AZ]
+      rds[(RDS MySQL - Multi-AZ)]
+    end
+  end
+  peer{{VPC Peering}}
+  internet --> cf
+  internet --> alb
+  alb --> front & back & web & game
+  front --> redis
+  back --> redis
+  web --> redis
+  game --> redis
+  front --> peer --> rds
+  back --> peer
+  web --> peer
+  game --> peer
