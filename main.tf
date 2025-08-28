@@ -329,8 +329,8 @@ resource "aws_lb" "app_alb" {
 
   tags = { Name = "alb-${var.project}-${var.operation}-001" }
   access_logs {
-    bucket = aws_s3_bucket.alb_logs.bucket
-    prefix = "alb"
+    bucket  = aws_s3_bucket.alb_logs.bucket
+    prefix  = "alb"
     enabled = true
   }
 }

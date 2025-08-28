@@ -27,6 +27,9 @@ resource "aws_s3_bucket_lifecycle_configuration" "alb_logs" {
   rule {
     id     = "expire-90-days"
     status = "Enabled"
+    filter {
+      prefix = ""
+    }
     expiration {
       days = 90
     }
@@ -43,18 +46,18 @@ resource "aws_s3_bucket_policy" "alb_logs" {
     Version = "2012-10-17",
     Statement = [
       {
-        Sid = "ELBLogDeliveryWrite",
-        Effect = "Allow",
+        Sid       = "ELBLogDeliveryWrite",
+        Effect    = "Allow",
         Principal = { AWS = data.aws_elb_service_account.this.arn },
-        Action = ["s3:PutObject"],
-        Resource = "${aws_s3_bucket.alb_logs.arn}/*"
+        Action    = ["s3:PutObject"],
+        Resource  = "${aws_s3_bucket.alb_logs.arn}/*"
       },
       {
-        Sid = "ELBLogDeliveryGetBucketAcl",
-        Effect = "Allow",
+        Sid       = "ELBLogDeliveryGetBucketAcl",
+        Effect    = "Allow",
         Principal = { AWS = data.aws_elb_service_account.this.arn },
-        Action = ["s3:GetBucketAcl"],
-        Resource = aws_s3_bucket.alb_logs.arn
+        Action    = ["s3:GetBucketAcl"],
+        Resource  = aws_s3_bucket.alb_logs.arn
       }
     ]
   })

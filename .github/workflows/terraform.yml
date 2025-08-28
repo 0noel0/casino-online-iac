@@ -1,0 +1,137 @@
+name: 'Terraform CI/CD'
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+env:
+  TF_VERSION: '1.6.0'
+  AWS_REGION: 'ca-central-1'
+
+jobs:
+  terraform-check:
+    name: 'Terraform Check'
+    runs-on: ubuntu-latest
+    environment: production
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: ${{ env.TF_VERSION }}
+
+    - name: Terraform Format Check
+      id: fmt
+      run: terraform fmt -check -recursive
+      continue-on-error: true
+
+    - name: Terraform Init
+      id: init
+      run: terraform init
+
+    - name: Terraform Validate
+      id: validate
+      run: terraform validate -no-color
+
+    - name: Terraform Plan
+      id: plan
+      if: github.event_name == 'pull_request'
+      run: terraform plan -no-color -input=false
+      continue-on-error: true
+      env:
+        TF_VAR_region: ${{ env.AWS_REGION }}
+        TF_VAR_cf_region: 'us-east-1'
+        TF_VAR_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+        TF_VAR_project: 'promaketing'
+        TF_VAR_operation: 'casino'
+        TF_VAR_root_domain: ${{ secrets.ROOT_DOMAIN }}
+        TF_VAR_app_domain: ${{ secrets.APP_DOMAIN }}
+        TF_VAR_api_domain: ${{ secrets.API_DOMAIN }}
+        TF_VAR_assets_domain: ${{ secrets.ASSETS_DOMAIN }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    - name: Update Pull Request
+      uses: actions/github-script@v7
+      if: github.event_name == 'pull_request'
+      env:
+        PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+          #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+          #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
+          #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+
+          <details><summary>Show Plan</summary>
+
+          \`\`\`terraform\n
+          ${process.env.PLAN}
+          \`\`\`
+
+          </details>
+
+          *Pushed by: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: output
+          })
+
+    - name: Terraform Plan Status
+      if: steps.plan.outcome == 'failure'
+      run: exit 1
+
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: terraform apply -auto-approve -input=false
+      env:
+        TF_VAR_region: ${{ env.AWS_REGION }}
+        TF_VAR_cf_region: 'us-east-1'
+        TF_VAR_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+        TF_VAR_project: 'promaketing'
+        TF_VAR_operation: 'casino'
+        TF_VAR_root_domain: ${{ secrets.ROOT_DOMAIN }}
+        TF_VAR_app_domain: ${{ secrets.APP_DOMAIN }}
+        TF_VAR_api_domain: ${{ secrets.API_DOMAIN }}
+        TF_VAR_assets_domain: ${{ secrets.ASSETS_DOMAIN }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+  security-scan:
+    name: 'Security Scan'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Run Checkov action
+      id: checkov
+      uses: bridgecrewio/checkov-action@master
+      with:
+        directory: .
+        framework: terraform
+        output_format: sarif
+        output_file_path: reports/results.sarif
+        download_external_modules: true
+        quiet: true
+        soft_fail: true
+
+    - name: Upload SARIF file
+      uses: github/codeql-action/upload-sarif@v3
+      if: always()
+      with:
+        sarif_file: reports/results.sarif
