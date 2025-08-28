@@ -12,6 +12,18 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 - Documentación mejorada
 - Workflows de CI/CD
 
+## [1.0.1] - 2025-01-17
+
+### Changed
+- Deshabilitado deploy automático en GitHub Actions por seguridad
+- Convertido a proyecto demo sin deployments automáticos
+- Actualizado README con advertencias de modo demo
+- Mantenida validación de Terraform sin ejecución real
+
+### Security
+- Eliminado riesgo de deployments accidentales en AWS
+- Agregadas múltiples advertencias de seguridad
+
 ## [1.0.0] - 2024-01-17
 
 ### Agregado
