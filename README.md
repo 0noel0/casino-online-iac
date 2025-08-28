@@ -1,8 +1,12 @@
 # Casino Online - Infraestructura como Código (IaC)
 
-[![Terraform](https://img.shields.io/badge/Terraform-1.6.0-623CE4?style=flat&logo=terraform)](https://www.terraform.io/)
-[![AWS](https://img.shields.io/badge/AWS-Cloud-FF9900?style=flat&logo=amazon-aws)](https://aws.amazon.com/)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+> ⚠️ **PROYECTO DEMO**: Esta es una demostración de infraestructura como código. No incluye deploy automático para evitar costos no deseados.
+
+[![Terraform](https://img.shields.io/badge/Terraform-1.6+-623CE4?style=flat&logo=terraform&logoColor=white)](https://www.terraform.io/)
+[![AWS](https://img.shields.io/badge/AWS-Cloud-FF9900?style=flat&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Release](https://img.shields.io/github/v/release/0noel0/casino-online-iac)](https://github.com/0noel0/casino-online-iac/releases)
+[![CI/CD](https://img.shields.io/github/actions/workflow/status/0noel0/casino-online-iac/terraform.yml?branch=main&label=CI%2FCD)](https://github.com/0noel0/casino-online-iac/actions)
 
 Infraestructura completa en AWS para una operación de casino online, implementada con **Terraform** siguiendo las mejores prácticas de seguridad, escalabilidad y mantenibilidad.
 
@@ -47,6 +51,14 @@ Toda la infraestructura está diseñada para la región **ca-central-1 (Canadá)
   - Grupos de seguridad segmentados por nivel (ALB, EC2, Redis, RDS)
 
 ---
+
+## ⚠️ Modo Demo
+
+**Este proyecto está configurado como demostración y NO ejecuta deployments automáticos por seguridad:**
+
+- ✅ **Validación**: Los workflows de CI/CD validan la sintaxis y configuración de Terraform
+- ❌ **Deploy automático**: Deshabilitado para evitar costos no deseados en AWS
+- 🔧 **Deploy manual**: Disponible ejecutando `terraform plan && terraform apply` localmente
 
 ## Requisitos Previos
 
