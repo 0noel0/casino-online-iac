@@ -1,4 +1,4 @@
-# 🎰 Casino Online - Infraestructura como Código (IaC)
+# Casino Online - Infraestructura como Código (IaC)
 
 [![Terraform](https://img.shields.io/badge/Terraform-1.6.0-623CE4?style=flat&logo=terraform)](https://www.terraform.io/)
 [![AWS](https://img.shields.io/badge/AWS-Cloud-FF9900?style=flat&logo=amazon-aws)](https://aws.amazon.com/)
@@ -6,7 +6,7 @@
 
 Infraestructura completa en AWS para una operación de casino online, implementada con **Terraform** siguiendo las mejores prácticas de seguridad, escalabilidad y mantenibilidad.
 
-## 📋 Tabla de Contenidos
+## Tabla de Contenidos
 
 - [Arquitectura](#-arquitectura)
 - [Requisitos Previos](#-requisitos-previos)
@@ -19,7 +19,7 @@ Infraestructura completa en AWS para una operación de casino online, implementa
 
 ---
 
-## 🏗️ Arquitectura
+## Arquitectura
 
 ### **Región**
 Toda la infraestructura está diseñada para la región **ca-central-1 (Canadá)**.
@@ -48,7 +48,7 @@ Toda la infraestructura está diseñada para la región **ca-central-1 (Canadá)
 
 ---
 
-## 📋 Requisitos Previos
+## Requisitos Previos
 
 Antes de comenzar, asegúrate de tener instalado:
 
@@ -69,7 +69,7 @@ Tu usuario/rol de AWS debe tener permisos para crear y gestionar:
 
 ---
 
-## 🚀 Instalación y Despliegue
+## Instalación y Despliegue
 
 ### 1. Clonar el repositorio
 
@@ -120,7 +120,7 @@ terraform apply
 
 ---
 
-## ⚙️ Configuración
+## Configuración
 
 ### Variables Requeridas
 
@@ -158,7 +158,7 @@ Para GitHub Actions, configura estos secrets:
 
 ---
 
-## 📖 Uso
+## Uso
 
 ### Comandos Disponibles
 
@@ -202,7 +202,7 @@ Ejemplo:
 
 ---
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 casino-online-iac/
@@ -243,7 +243,7 @@ casino-online-iac/
 
 ---
 
-## 🔒 Seguridad
+## Seguridad
 
 Este proyecto implementa múltiples capas de seguridad:
 
@@ -258,7 +258,7 @@ Para reportar vulnerabilidades de seguridad, por favor lee [SECURITY.md](SECURIT
 
 ---
 
-## 📄 Licencia
+## Licencia
 
 Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
 
