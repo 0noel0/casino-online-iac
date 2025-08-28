@@ -1,6 +1,6 @@
 # Casino Online - Infraestructura como Código (IaC)
 
-> ⚠️ **PROYECTO DEMO**: Esta es una demostración de infraestructura como código. No incluye deploy automático para evitar costos no deseados.
+> **PROYECTO DEMO**: Esta es una demostración de infraestructura como código. No incluye deploy automático para evitar costos no deseados.
 
 [![Terraform](https://img.shields.io/badge/Terraform-1.6+-623CE4?style=flat&logo=terraform&logoColor=white)](https://www.terraform.io/)
 [![AWS](https://img.shields.io/badge/AWS-Cloud-FF9900?style=flat&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/)
@@ -52,7 +52,7 @@ Toda la infraestructura está diseñada para la región **ca-central-1 (Canadá)
 
 ---
 
-## ⚠️ Modo Demo
+## Modo Demo
 
 **Este proyecto está configurado como demostración y NO ejecuta deployments automáticos por seguridad:**
 
