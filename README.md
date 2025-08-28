@@ -3,8 +3,6 @@
 [![Terraform](https://img.shields.io/badge/Terraform-1.6.0-623CE4?style=flat&logo=terraform)](https://www.terraform.io/)
 [![AWS](https://img.shields.io/badge/AWS-Cloud-FF9900?style=flat&logo=amazon-aws)](https://aws.amazon.com/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Release](https://img.shields.io/github/v/release/tu-usuario/casino-online-iac)](https://github.com/tu-usuario/casino-online-iac/releases)
-[![CI/CD](https://github.com/tu-usuario/casino-online-iac/workflows/Terraform%20CI/CD/badge.svg)](https://github.com/tu-usuario/casino-online-iac/actions)
 
 Infraestructura completa en AWS para una operación de casino online, implementada con **Terraform** siguiendo las mejores prácticas de seguridad, escalabilidad y mantenibilidad.
 
@@ -16,7 +14,6 @@ Infraestructura completa en AWS para una operación de casino online, implementa
 - [Configuración](#-configuración)
 - [Uso](#-uso)
 - [Estructura del Proyecto](#-estructura-del-proyecto)
-- [Contribuir](#-contribuir)
 - [Seguridad](#-seguridad)
 - [Licencia](#-licencia)
 
@@ -246,20 +243,6 @@ casino-online-iac/
 
 ---
 
-## 🤝 Contribuir
-
-¡Las contribuciones son bienvenidas! Por favor:
-
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
-Por favor lee [CONTRIBUTING.md](CONTRIBUTING.md) para más detalles sobre nuestro código de conducta y el proceso de envío de pull requests.
-
----
-
 ## 🔒 Seguridad
 
 Este proyecto implementa múltiples capas de seguridad:
@@ -278,49 +261,6 @@ Para reportar vulnerabilidades de seguridad, por favor lee [SECURITY.md](SECURIT
 ## 📄 Licencia
 
 Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
-
----
-
-## 📞 Soporte
-
-Si tienes preguntas o necesitas ayuda:
-
-- 📧 Abre un [Issue](https://github.com/tu-usuario/casino-online-iac/issues)
-- 💬 Inicia una [Discusión](https://github.com/tu-usuario/casino-online-iac/discussions)
-- 📖 Revisa la [documentación](./docs/)
-
----
-
-## 🏷️ Versioning
-
-Usamos [SemVer](http://semver.org/) para el versionado. Para las versiones disponibles, mira los [tags en este repositorio](https://github.com/tu-usuario/casino-online-iac/tags).
-
----
-
-## ✨ Reconocimientos
-
-- Terraform por la excelente herramienta de IaC
-- AWS por la plataforma cloud robusta
-- La comunidad open source por las mejores prácticas
-
----
-
-**¿Te gusta este proyecto? ¡Dale una ⭐ en GitHub!**  variables.tf
-  outputs.tf
-  locals.naming.tf
-  s3_extras.tf
-  security_baseline.tf
-  flowlogs.tf
-  terraform.tfvars.example
-  Makefile
-  .pre-commit-config.yaml
-  README.md
-  /docs
-    arquitectura_casino_online.svg
-    arquitectura_casino_online.mmd
-    costos.xlsx
-    seguridad-checklist.md
-```
 
 ---
 
