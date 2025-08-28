@@ -238,9 +238,7 @@ casino-online-iac/
 ├── Makefile                  # Comandos automatizados
 ├── .gitignore               # Archivos ignorados por Git
 ├── CHANGELOG.md             # Historial de cambios
-├── CONTRIBUTING.md          # Guía de contribución
 ├── LICENSE                  # Licencia del proyecto
-├── SECURITY.md             # Política de seguridad
 ├── VERSION                 # Versión actual
 └── README.md              # Este archivo
 ```
